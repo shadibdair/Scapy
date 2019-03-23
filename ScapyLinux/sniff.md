@@ -30,7 +30,7 @@ that packet off into some sort of storage (.pcap appending or API POSTing anyone
 This script keeps a Counter with an A/Z pair of IP addresses, displays the total packet 
 count with each packet print(), and then prints out the conversation counts at the end.
 
-
+---
 #! /usr/bin/env python3
  
 from collections import Counter
