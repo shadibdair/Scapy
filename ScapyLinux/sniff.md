@@ -70,12 +70,10 @@ Packet #10: 172.16.98.203 ==> 172.16.72.72
 172.16.200.88 <--> 172.16.98.255: 1
 172.16.72.72 <--> 172.16.98.203: 6
 ```
-
+---
 # Custom Formatted ARP Monitor
+### Here I use the same prn function and some conditional statements to very clearly tell me what ARP traffic my computer is seeing.
 ```
-Here I use the same prn function and some conditional statements to very clearly tell me what ARP traffic my computer is seeing.
-
-
 #! /usr/bin/env python3
 
 from collections import Counter
@@ -154,6 +152,7 @@ Request: 172.16.20.200 is asking about 172.16.20.44
 *Response: dd:ee:ff:a2:02:bf has address 172.16.20.44
 
  ```
+ ---
  # An important thing to keep in mind when using the prn argument
 ```
 
