@@ -163,5 +163,6 @@ This will generate the returned text before the function has a packet to
 parse and will not give you the results you want.
 
 If you want to pass parameters into the custom_action function for additional 
-control or the ability to modularize out the customAction function, you will have to use a nested function. I cover how to do that in the next article.
+control or the ability to modularize out the customAction function, 
+you will have to use a nested function. I cover how to do that in the next article.
 ```
