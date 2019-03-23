@@ -30,7 +30,8 @@ that packet off into some sort of storage (.pcap appending or API POSTing anyone
 This script keeps a Counter with an A/Z pair of IP addresses, displays the total packet 
 count with each packet print(), and then prints out the conversation counts at the end.
 
----
+```
+
 #! /usr/bin/env python3
  
 from collections import Counter
@@ -69,7 +70,8 @@ Packet #10: 172.16.98.203 ==> 172.16.72.72
 172.16.200.88 <--> 255.255.255.255: 3
 172.16.200.88 <--> 172.16.98.255: 1
 172.16.72.72 <--> 172.16.98.203: 6
-```
+
+
 ---
 # Custom Formatted ARP Monitor
 ### Here I use the same prn function and some conditional statements to very clearly tell me what ARP traffic my computer is seeing.
