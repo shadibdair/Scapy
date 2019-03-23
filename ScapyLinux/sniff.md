@@ -22,6 +22,7 @@ to doing some advanced packet parsing or manipulation, or even shipping
 that packet off into some sort of storage (.pcap appending or API POSTing anyone??).
 
 ```
+---
 # Here’s a simple example for keeping track of the number of packets sniffed
 ```
 
