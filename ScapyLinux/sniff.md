@@ -1,22 +1,33 @@
 # sniffer
 ```
-Scapy has a sniff function that is great for getting packets off the wire, but there’s much more to show off how great this function really is! sniff has  an argument prn that allows you to pass a function that executes with each packet sniffed. The intended purpose of this function is to control how the packet prints out in the console allowing you to replace the default packet printing display with a format of your choice.
+Scapy has a sniff function that is great for getting packets off the wire, 
+but there’s much more to show off how great this function really is! sniff has 
+an argument prn that allows you to pass a function that executes with each packet sniffed. 
+The intended purpose of this function is to control how the packet prints out in
+the console allowing you to replace the default packet printing display with a format of your choice.
 
 # The prn argument is defined as:
 
    * prn: function to apply to each packet. If something is returned, it is displayed. For 
    * instance you can use prn = lambda x: x.summary().
 
-In order for your program/script to format and return the packet info as you wish, the sniff function passes the packet object as the one and only argument into the function you specify in the sniff’s prn argument. This gives us the option to do some fun stuff (not just formatting) with each packet sniffed 🙂
+In order for your program/script to format and return the packet info as you wish, 
+the sniff function passes the packet object as the one and only argument into 
+the function you specify in the sniff’s prn argument. This gives us 
+the option to do some fun stuff (not just formatting) with each packet sniffed 🙂
 
-For example, we can now perform custom actions with each sniffed packet. This can be anything from incrementing a packet count somewhere in the program, to doing some advanced packet parsing or manipulation, or even shipping that packet off into some sort of storage (.pcap appending or API POSTing anyone??).
-
-```
+For example, we can now perform custom actions with each sniffed packet. 
+This can be anything from incrementing a packet count somewhere in the program, 
+to doing some advanced packet parsing or manipulation, or even shipping 
+that packet off into some sort of storage (.pcap appending or API POSTing anyone??).
 
 ```
 # Here’s a simple example for keeping track of the number of packets sniffed
+```
 
-This script keeps a Counter with an A/Z pair of IP addresses, displays the total packet count with each packet print(), and then prints out the conversation counts at the end.
+
+This script keeps a Counter with an A/Z pair of IP addresses, displays the total packet 
+count with each packet print(), and then prints out the conversation counts at the end.
 
 
 #! /usr/bin/env python3
@@ -62,6 +73,8 @@ Packet #10: 172.16.98.203 ==> 172.16.72.72
 # Custom Formatted ARP Monitor
 ```
 Here I use the same prn function and some conditional statements to very clearly tell me what ARP traffic my computer is seeing.
+
+
 #! /usr/bin/env python3
 
 from collections import Counter
@@ -139,10 +152,16 @@ Request: 172.16.20.15 is asking about 172.16.20.58
 Request: 172.16.20.200 is asking about 172.16.20.44
 *Response: dd:ee:ff:a2:02:bf has address 172.16.20.44
 
- 
-# An important thing to keep in mind when using the prn argument
+ ```
+ # An important thing to keep in mind when using the prn argument
+```
 
-In the case of the example above, you are passing the custom_action function into the sniff function. If you used sniff(prn=custom_action()) instead, you would be passing the function’s returned value to the sniff function. This will generate the returned text before the function has a packet to parse and will not give you the results you want.
+In the case of the example above, you are passing the custom_action 
+function into the sniff function. If you used sniff(prn=custom_action())
+instead, you would be passing the function’s returned value to the sniff function.
+This will generate the returned text before the function has a packet to
+parse and will not give you the results you want.
 
-If you want to pass parameters into the custom_action function for additional control or the ability to modularize out the customAction function, you will have to use a nested function. I cover how to do that in the next article.
+If you want to pass parameters into the custom_action function for additional 
+control or the ability to modularize out the customAction function, you will have to use a nested function. I cover how to do that in the next article.
 ```
