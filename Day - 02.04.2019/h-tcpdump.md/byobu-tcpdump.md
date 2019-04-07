@@ -401,14 +401,12 @@ $&[`-iAH!;=|LmCoPA7MQ q   HUZZka\)nE
 ```
 ## Frist Packet:
 ```
-orig-10003ynetcotcdnnetZ^IPfO>
-                              JJ&^gfE<?uGj5(hotynetcoilPfOfC
-                                                          &^gfE@@j5ʆthotynetcoilhotynetcoil7ynetcoild4pnetynetcoild4pnet4?a39gakamaineta39gakamainetQa39g
+ 00 1f 1f - Ethernet II
 ```
 
 ## Length of packet:
 ```
-Length: 8694
+Length: 84 bytes on the wire (672 bit)
 ```
 
 ---
@@ -464,7 +462,48 @@ for i in range(0,len(packet)):
       cnt++
       print(cnt) 
 ```
+* find all
+```
+from scapy.all import *
 
+packets = rdpcap('CaptureFile.cap')
+print(packets)
+
+# Count amount of appearances:
+google     = 0
+ynet       = 0
+SuperPharm = 0
+HelloWorld = 0
+
+# Loop to run on every packet: 
+for i in range(0,len(packets)):
+
+    a = packets[i].show(dump=True)
+
+    if 'google' in a:
+        google += 1
+    if 'ynet' in a:
+        ynet += 1
+    if 'SuperPharmLogo.gif' in a:
+        SuperPharm += 1
+    if 'HelloWorld' in a:
+        HelloWorld += 1
+
+print("---------Appearances:------------")
+print("[1] google: ",google)
+print("[2] ynet: ",ynet)
+print("[3] SuperPharmLogo.gif: ",SuperPharm)
+print("[4] HelloWorld: ",HelloWorld)
+
+'''
+RESULT:
+---------Appearances:------------
+[1] google:  265
+[2] ynet:  318
+[3] SuperPharmLogo.gif:  1
+[4] HelloWorld:  0
+'''
+```
 ---
 
 # Question -3-
@@ -526,21 +565,43 @@ b'\x00&^gf^\x00\x1f\x1f\xbf\x9f\x10\x08\x00E\x00\x00\xd2\x00\x00@\x00@\x11\xb4_\
 
 ## script python CaptureFile.cap get HTTP GET from Host:
 ```
-import socket 
-  
-# Function to display hostname and 
-# IP address 
-def get_Host_name_IP(): 
-    try: 
-        host_name = socket.gethostname() 
-        host_ip = socket.gethostbyname(host_name) 
-        print("Hostname :  ",host_name) 
-        print("IP : ",host_ip) 
-    except: 
-        print("Unable to get Hostname and IP") 
-  
-# Driver code 
-get_Host_name_IP() #Function call 
+from scapy.all import *
+import re
+
+packets = rdpcap('CaptureFile.cap')
+
+# Loop to run on every packet: 
+for i in range(0,len(packets)):   
+    # show() Convert pcap to string type
+    a = packets[i].show(dump=True)
+    b = packets[i] # use it to extract [Raw].load - type byte
+    if 'GET' in a:
+        s=str(b[Raw].load)
+        # regex - to get the data that belongs to 'Host'
+        print(re.search('Host:(.*)Connection',s)) 
+```
+### output
+```
+  RESULT: (only half of it..;)
+<re.Match object; span=(51, 85), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(74, 108), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(49, 83), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(61, 95), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(48, 82), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(60, 94), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(39, 73), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(49, 83), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(44, 78), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(45, 79), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(42, 76), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(40, 74), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(45, 79), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(39, 73), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(45, 79), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(46, 80), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(58, 92), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(47, 81), match='Host: www.ynet.co.il\\r\\nConnection'>
+<re.Match object; span=(41, 75), match='Host: www.ynet.co.il\\r\\nConnection'>
 ```
 
 
