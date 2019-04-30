@@ -7,7 +7,7 @@ WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
 openssh-client/bionic-updates,bionic-security,now 1:7.6p1-4ubuntu0.3 amd64 [installed]
   secure shell (SSH) client, for secure access to remote machines
 
---
+---
 openssh-server/bionic-updates,bionic-security 1:7.6p1-4ubuntu0.3 amd64
   secure shell (SSH) server, for secure access from remote machines
 
